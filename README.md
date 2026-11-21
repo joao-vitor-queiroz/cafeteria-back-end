@@ -1,2 +1,2 @@
-# cafeteria-front-end
-Projeto final da cadeira de Programação Front-end
+# cafeteria-back-end
+Projeto final da cadeira de Programação Orientada a Objetos
