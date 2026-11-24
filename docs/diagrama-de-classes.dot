@@ -1,0 +1,52 @@
+digraph G {
+  graph [rankdir=LR, splines=true, nodesep=0.9, ranksep=1.8, fontname="DejaVu Sans", bgcolor="white", pad=0.5,
+         label=<<B>Cafeteria Back-End — Diagrama de Classes</B><BR/><FONT POINT-SIZE="14" COLOR="#b45309">PROPOSTA: atributos e relações ainda não definidos no código — validar com o grupo</FONT>>,
+         labelloc=t, fontsize=24];
+  node  [shape=plain, fontname="DejaVu Sans", fontsize=14];
+  edge  [fontname="DejaVu Sans", fontsize=13, color="#44403c", penwidth=1.8, arrowhead=none, labeldistance=2.2];
+
+  Cliente [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="7" BGCOLOR="#dbeafe" COLOR="#1d4ed8">
+      <TR><TD BGCOLOR="#1d4ed8"><FONT COLOR="white"><B>Cliente</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: Long<BR ALIGN="LEFT"/>- nome: String<BR ALIGN="LEFT"/>- email: String<BR ALIGN="LEFT"/>- telefone: String<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  CartaoFidelidade [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="7" BGCOLOR="#fef3c7" COLOR="#b45309">
+      <TR><TD BGCOLOR="#b45309"><FONT COLOR="white"><B>CartaoFidelidade</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: Long<BR ALIGN="LEFT"/>- pontos: Integer<BR ALIGN="LEFT"/>- dataCriacao: LocalDate<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  Pedido [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="7" BGCOLOR="#dcfce7" COLOR="#15803d">
+      <TR><TD BGCOLOR="#15803d"><FONT COLOR="white"><B>Pedido</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: Long<BR ALIGN="LEFT"/>- dataHora: LocalDateTime<BR ALIGN="LEFT"/>- status: String<BR ALIGN="LEFT"/>- valorTotal: Double<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  Produto [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="7" BGCOLOR="#f3e8ff" COLOR="#7e22ce">
+      <TR><TD BGCOLOR="#7e22ce"><FONT COLOR="white"><B>Produto</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: Long<BR ALIGN="LEFT"/>- nome: String<BR ALIGN="LEFT"/>- descricao: String<BR ALIGN="LEFT"/>- preco: Double<BR ALIGN="LEFT"/>- categoria: String<BR ALIGN="LEFT"/>- disponivel: Boolean<BR ALIGN="LEFT"/>- tempoPreparoMinutos: Integer<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  Ingredientes [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="7" BGCOLOR="#fee2e2" COLOR="#b91c1c">
+      <TR><TD BGCOLOR="#b91c1c"><FONT COLOR="white"><B>Ingredientes</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT">- id: Long<BR ALIGN="LEFT"/>- nome: String<BR ALIGN="LEFT"/>- quantidadeEstoque: Double<BR ALIGN="LEFT"/>- unidade: String<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  Nota [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" COLOR="#a8a29e" BGCOLOR="#fafaf9">
+      <TR><TD ALIGN="LEFT"><B>Como ler</B></TD></TR>
+      <TR><TD ALIGN="LEFT">1 = exatamente um   0..* = zero ou vários<BR ALIGN="LEFT"/>Cada classe tem Controller, Service e<BR ALIGN="LEFT"/>Repository no projeto (getters e setters<BR ALIGN="LEFT"/>omitidos para simplificar).<BR ALIGN="LEFT"/>- = atributo privado (private)<BR ALIGN="LEFT"/>Os campos de Produto vêm do front-end.<BR ALIGN="LEFT"/></TD></TR>
+    </TABLE>>];
+
+  Cliente -> Pedido [taillabel="1", headlabel="0..*", label="  faz  "];
+  Cliente -> CartaoFidelidade [taillabel="1", headlabel="0..1", label="  possui  "];
+  Pedido -> Produto [taillabel="0..*", headlabel="1..*", label="  contém  "];
+  Produto -> Ingredientes [taillabel="0..*", headlabel="1..*", label="  usa  "];
+
+  {rank=same; Cliente; }
+  {rank=same; Pedido; CartaoFidelidade}
+  Nota -> Ingredientes [style=invis];
+}
