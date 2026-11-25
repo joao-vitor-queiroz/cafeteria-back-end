@@ -1,5 +1,9 @@
 package com.example.demo.repository;
 
-public class IngredientesRepository {
-    
+import com.example.demo.model.Ingredientes;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IngredientesRepository extends JpaRepository<Ingredientes, Long> {
 }
