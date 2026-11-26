@@ -1,0 +1,69 @@
+digraph G {
+  graph [rankdir=TB, splines=spline, nodesep=1.1, ranksep=1.1, fontname="DejaVu Sans",
+         bgcolor="white", pad=0.5, labelloc=t, fontsize=26,
+         label=<<B>Cafeteria Back-End — Diagrama de Classes</B>>];
+  node  [shape=plain, fontname="DejaVu Sans", fontsize=14];
+  edge  [fontname="DejaVu Sans", fontsize=13, color="#334155", penwidth=1.8,
+         arrowhead=none, arrowtail=none, dir=none, labeldistance=2.4, labelangle=0];
+
+  Cliente [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#1d4ed8" BGCOLOR="white">
+      <TR><TD BGCOLOR="#1d4ed8"><FONT COLOR="white"><B>Cliente</B></FONT></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">- id: Long<BR/>- nome: String<BR/>- email: String<BR/>- telefone: String<BR/>- dataNascimento: String<BR/>- endereco: String</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT COLOR="#475569">- pedido: List&lt;Pedido&gt;<BR/>- cartaoFidelidade: CartaoFidelidade</FONT></TD></TR>
+    </TABLE>>];
+
+  CartaoFidelidade [label=<
+    <TABLE BORDER="2" STYLE="dashed" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#b45309" BGCOLOR="white">
+      <TR><TD BGCOLOR="#b45309"><FONT COLOR="white"><B>CartaoFidelidade</B></FONT></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">- id: Long<BR/>- pontos: Integer<BR/>- dataCriacao: LocalDate</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT COLOR="#475569">- cliente: Cliente</FONT></TD></TR>
+    </TABLE>>];
+
+  Pedido [label=<
+    <TABLE BORDER="2" STYLE="dashed" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#15803d" BGCOLOR="white">
+      <TR><TD BGCOLOR="#15803d"><FONT COLOR="white"><B>Pedido</B></FONT></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">- id: Long<BR/>- dataHora: LocalDateTime<BR/>- status: String<BR/>- valorTotal: Double</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT COLOR="#475569">- cliente: Cliente<BR/>- produtos: List&lt;Produto&gt;</FONT></TD></TR>
+    </TABLE>>];
+
+  Produto [label=<
+    <TABLE BORDER="2" STYLE="dashed" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#7e22ce" BGCOLOR="white">
+      <TR><TD BGCOLOR="#7e22ce"><FONT COLOR="white"><B>Produto</B></FONT></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">- id: Long<BR/>- nome: String<BR/>- descricao: String<BR/>- preco: Double<BR/>- categoria: String<BR/>- disponivel: Boolean<BR/>- tempoPreparoMinutos: Integer</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT COLOR="#475569">- ingredientes: Set&lt;Ingredientes&gt;</FONT></TD></TR>
+    </TABLE>>];
+
+  Ingredientes [label=<
+    <TABLE BORDER="2" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#b91c1c" BGCOLOR="white">
+      <TR><TD BGCOLOR="#b91c1c"><FONT COLOR="white"><B>Ingredientes</B></FONT></TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">- idIngrediente: Long<BR/>- nome: String<BR/>- unidadeMedida: String<BR/>- stock: Double<BR/>- alergenio: String</TD></TR>
+      <HR/>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT"><FONT COLOR="#475569">- produtos: Set&lt;Produto&gt;</FONT></TD></TR>
+    </TABLE>>];
+
+  Legenda [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5" COLOR="#94a3b8" BGCOLOR="#f8fafc">
+      <TR><TD ALIGN="LEFT"><B>Legenda</B></TD></TR>
+      <TR><TD ALIGN="LEFT" BALIGN="LEFT">Borda contínua = já implementada no código<BR/>Borda tracejada = proposta (classe ainda vazia)<BR/>1 = exatamente um · 0..1 = opcional · 0..* = zero ou vários<BR/>Getters e setters omitidos</TD></TR>
+    </TABLE>>];
+
+  {rank=same; Cliente; CartaoFidelidade}
+  {rank=same; Pedido; Produto; Ingredientes}
+
+  Cliente -> CartaoFidelidade [taillabel="1", headlabel="0..1", label="  possui  "];
+  Cliente -> Pedido           [taillabel="1", headlabel="0..*", label="  faz  "];
+  Pedido  -> Produto          [taillabel="0..*", headlabel="1..*", label="  contém  "];
+  Produto -> Ingredientes     [taillabel="0..*", headlabel="1..*", label="  usa  "];
+
+  Ingredientes -> Legenda [style=invis];
+}
