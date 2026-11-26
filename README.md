@@ -8,9 +8,9 @@ API da cafeteria feita com **Spring Boot**, organizada em camadas (Controller �
 
 ## 🧩 Diagrama de Classes
 
-![Diagrama de classes da Cafeteria Back-End](docs/diagrama-de-classes.png)
+![Diagrama de classes da Cafeteria Back-End](docs/diagrama-cafeteria.png)
 
-> ⚠️ **Proposta inicial:** as classes do projeto ainda estão sem atributos. Os campos e as relações acima devem ser validados pelo grupo e atualizados conforme a implementação avançar. O código-fonte do diagrama está em [`docs/diagrama-de-classes.dot`](docs/diagrama-de-classes.dot).
+> ℹ️ **Legenda:** classes com borda **contínua** já estão implementadas no código (`Cliente` e `Ingredientes`). Classes com borda **tracejada** são uma proposta, pois ainda estão vazias, e devem ser validadas pelo grupo. O código-fonte do diagrama está em [`docs/diagrama-cafeteria.dot`](docs/diagrama-cafeteria.dot).
 
 | Classe | Papel no sistema |
 | --- | --- |
