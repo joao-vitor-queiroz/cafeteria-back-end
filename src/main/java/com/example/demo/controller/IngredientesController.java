@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Ingredientes;
 import com.example.demo.service.IngredientesService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/ingredientes")
+@Tag(name = "Ingredientes", description = "Controle de ingredientes e estoque")
 public class IngredientesController {
 
     private final IngredientesService service;
@@ -44,4 +46,4 @@ public class IngredientesController {
         service.excluir(id);
         return ResponseEntity.noContent().build();
     }
-}
+}

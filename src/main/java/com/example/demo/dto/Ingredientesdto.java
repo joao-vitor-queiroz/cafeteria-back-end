@@ -58,4 +58,4 @@ public class Ingredientesdto {
     public void setAlergenio(String alergenio) {
         this.alergenio = alergenio;
     }
-}
+}
