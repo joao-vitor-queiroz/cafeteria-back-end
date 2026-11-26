@@ -1,5 +1,16 @@
 package com.example.demo.repository;
 
-public class CartaoFidelidadeRepository {
-    
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.model.CartaoFidelidade;
+
+@Repository
+public interface CartaoFidelidadeRepository extends JpaRepository<CartaoFidelidade, Long> {
+
+    boolean existsByClienteId(Long clienteId);
+
+    Optional<CartaoFidelidade> findByClienteId(Long clienteId);
 }
